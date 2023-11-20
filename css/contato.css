@@ -1,0 +1,53 @@
+
+#form-background{
+    background-color: rgb(232, 231, 231);
+    margin: auto;
+    max-width: 720px;
+    height: 60vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+
+
+fieldset {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+input {
+    min-width:50%;
+    padding: 10px;
+    border: 0;
+    outline: 0;
+    transition: 0.2s border-bottom;
+}
+
+input:focus{
+    width: 200px;
+    border-bottom:5px solid  rgb(117, 193, 255);
+    background-color: white;
+    animation: flutua 1.2s  alternate;
+}
+
+button{
+    min-width: 40%;
+    border: none;
+    background-color: rgb(117, 193, 255);
+    color: white;
+}
+
+@keyframes flutua{
+    from {
+        transform: translateY(20px);
+    }
+
+   
+}
+
+/* mediaquery */
+
