@@ -62,33 +62,12 @@ input[type="checkbox"] {
 
 /* configurações gerais */
 
-table {
-  max-width: 600px;
-  margin: 20px auto 0px auto;
+ul.lista {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 10px;
 }
 
-td {
-  font-size: 1.2em;
-}
-td > button {
-  margin-left: 400px;
-}
-
-p {
-  font-size: 1.2em;
-  padding: 20px 5px;
-  background-color: white;
-}
-
-@media screen and (max-width: 500px) {
-  td {
-    max-width: 20px;
-  }
-
-  td > button {
-    margin-left: 80px;
-  }
-  fieldset {
-    left: 0;
-  }
+ul.lista li {
+  display: contents;
 }
