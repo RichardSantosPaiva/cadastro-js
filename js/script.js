@@ -1,78 +1,69 @@
-// array para armazenamento de dados
-const products = [];
+const formulario = document.getElementById("formulario");
+const listaTarefas = document.getElementById("lista-tarefas");
+const listaConcluidas = document.getElementById("lista-concluidas");
 
-function addProduct() {
-  const productName = document.getElementById("product-name").value;
+const tarefas = {};
 
-  //verificando se há um valor add  no array e chamamos o exebir produtos
+formulario.addEventListener("submit", (evento) => {
+  evento.preventDefault();
 
-  if (productName) {
-    const product = {
-      name: productName,
-    };
+  const nome = document.getElementById("nome-tarefa").value;
 
-    products.push(product);
-    displayProducts();
-    document.getElementById("product-name").value = ""; // apagando o campo para entender que foi enviado dado
-  }
-}
+  adicionaTarefa(nome);
 
-function displayProducts() {
-  // insetindo colunas, com respectivos conteudos, e um botão de remover
-  const productList = document.getElementById("product-list");
-  productList.innerHTML = "";
+  renderizarTarefas();
 
-  products.forEach(function (product) {
-    const row = productList.insertRow();
-    const cell1 = row.insertCell(0);
-    cell1.innerHTML =
-      `<input type="checkbox" onclick="comprado(this)">` + product.name;
-    const cell2 = row.insertCell(1);
-    cell2.innerHTML = `
-        <button class='btn btn-danger removeu' onclick='removerlinhaTabela1(this)'><span class="material-symbols-outlined">delete </span></button></td>
-        `;
-  });
-}
+  document.getElementById("nome-tarefa").value = "";
 
-//remoção da linha da primeira tabela
-function removerlinhaTabela1(linha) {
-  let i = linha.parentNode.rowIndex;
-  document.getElementById("product-list").deleteRow(i);
-  products.splice(i - 1, 1); // Remove o item correspondente do array
-}
-
-function comprado(checkbox) {
-  // quando o checkbox for checado, o item é insetido na tabela de
-  //tarefas concluida e pode ser removida
-
-  if (checkbox.checked) {
-    const productList = document.getElementById("item-comprado");
-
-    alert("Item de tarefa concluido, role para baixo para conferir");
-    products.forEach(function (product) {
-      const row = productList.insertRow();
-      const cell1 = row.insertCell(0);
-      row.classList.add("produto-comprado");
-      cell1.innerHTML = product.name;
-      const cell2 = row.insertCell(1);
-      cell2.innerHTML = `
-            <button class='btn btn-danger' onclick='removerlinhaTabela2(this)'><span class="material-symbols-outlined">delete </span></button></td>
-            `;
-    });
-  }
-}
-// removação de linha para a segunda tabela
-function removerlinhaTabela2(linha) {
-  let i = linha.parentNode.rowIndex;
-  document.getElementById("item-comprado").deleteRow(i);
-  products.splice(i - 1, 1); // Remove o item correspondente do array
-}
-
-//
-
-const productForm = document.getElementById("formulario");
-
-productForm.addEventListener("submit", function (e) {
-  e.preventDefault(); //evita o recarregamento da pagina
-  addProduct();
+  formulario.reset();
 });
+
+function adicionaTarefa(nome, concluido = false) {
+  const id = window.crypto.randomUUID();
+  tarefas[id] = { nome, concluido };
+
+  return id;
+}
+
+function alternaTarefa(id) {
+  tarefas[id].concluido = !tarefas[id].concluido;
+}
+
+function removeTarefa(id) {
+  delete tarefas[id];
+}
+
+function renderizarTarefas() {
+  listaTarefas.innerHTML = "";
+  listaConcluidas.innerHTML = "";
+
+  for (const id in tarefas) {
+    const tarefa = tarefas[id];
+
+    const lista = tarefa.concluido ? listaConcluidas : listaTarefas;
+
+    const li = document.createElement("li");
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = tarefa.concluido;
+
+    checkbox.addEventListener("change", () => {
+      alternaTarefa(id);
+      renderizarTarefas();
+    });
+
+    const botao = document.createElement("button");
+    botao.classList.add("btn", "btn-danger", "removeu");
+    botao.innerHTML = '<span class="material-symbols-outlined">delete </span>';
+    botao.addEventListener("click", () => {
+      removeTarefa(id);
+      renderizarTarefas();
+    });
+
+    li.append(checkbox, tarefa.nome, botao);
+    lista.append(li);
+  }
+}
+
+renderizarTarefas();
