@@ -1,104 +1,94 @@
-
-
 /* configurando o forms */
 
 #form-background {
-    padding: 10px;;
-    background-color: rgb(232, 231, 231);
-    margin: auto;
-    max-width: 720px;
-    position: relative;
+  padding: 10px;
+  background-color: rgb(232, 231, 231);
+  margin: auto;
+  max-width: 720px;
+  position: relative;
+}
 
+form {
+  max-width: 400px;
+  margin: 0 auto;
+
+  padding: 1rem;
+
+  background-color: white;
+  border-radius: 10px;
 }
 
 fieldset {
-    background-color: white;
-    border-radius:10px ;
-    border:none;
-    max-width: 400px;
-    position: relative;
-    left: 23%;
-    height: 70px;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1rem;
 
+  border: none;
 }
 
+button,
 input {
-    padding: 10px;
-    border-radius: 2px;
-    border: 0;
-    outline: 0;
+  padding: 10px;
+  border-radius: 2px;
+  border: 0;
+  outline: 0;
 }
 
-input[id="product-name"] {
-    position: relative;
-    top: 10px;
-    left: 50px;
-    width: 50px;
-    transition: 2s width; 
-    background-color: rgba(207, 207, 207, 0.4);
-    text-align: center;
+input#nome-tarefa {
+  width: 100%;
+  background-color: rgba(207, 207, 207, 0.4);
+  text-align: center;
+
+  border-bottom: 3px solid rgb(151, 151, 252);
 }
 
-input[type="submit"] {
-    width: 60px;
-    position: absolute;
-    top: 10px;
-
-    right: 40px;
-    font-size: 1.1em;
-    color: white;
-    background-color: rgb(151, 151, 252);
-    cursor: pointer;
-}
-
-
-input[id="product-name"]:focus{
-    width: 200px;
-    border-bottom:3px solid  rgb(117, 193, 255);
-    background-color: white;
+button[type="submit"] {
+  width: 60px;
+  font-size: 1.1em;
+  color: white;
+  background-color: rgb(151, 151, 252);
+  cursor: pointer;
 }
 
 input[type="checkbox"] {
-    margin-right: 10px;
+  margin-right: 10px;
 }
-
-
 
 /* quando o item for comprado */
 
 .produto-comprado {
-    text-decoration: line-through;
+  text-decoration: line-through;
 }
 
 /* configurações gerais */
 
 table {
-    max-width: 600px;
-    margin: 20px auto 0px auto;
+  max-width: 600px;
+  margin: 20px auto 0px auto;
 }
 
 td {
-    font-size: 1.2em;
+  font-size: 1.2em;
 }
 td > button {
-    margin-left: 400px;
+  margin-left: 400px;
 }
 
 p {
-    font-size: 1.2em;
-    padding: 20px  5px;
-    background-color: white;
+  font-size: 1.2em;
+  padding: 20px 5px;
+  background-color: white;
 }
 
-@media screen and (max-width:500px) {
-    td{
-        max-width: 20px;
-    }
+@media screen and (max-width: 500px) {
+  td {
+    max-width: 20px;
+  }
 
-   td> button {
-        margin-left: 80px;
-    }
-    fieldset{
-        left: 0;
-    }
+  td > button {
+    margin-left: 80px;
+  }
+  fieldset {
+    left: 0;
+  }
 }
